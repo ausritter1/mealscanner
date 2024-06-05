@@ -6,8 +6,7 @@ from PIL import Image
 import io
 
 # OpenAI API Key
-api_key = os.getenv('OPENKEY')
-
+api_key = OkayCool
 
 # Function to encode the image
 def encode_image(image):
