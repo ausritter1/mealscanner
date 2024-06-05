@@ -6,7 +6,7 @@ from PIL import Image
 import io
 
 # OpenAI API Key
-api_key = os.getenv(OPENKEY)
+api_key = os.getenv('OPENKEY')
 
 
 # Function to encode the image
