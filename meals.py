@@ -5,9 +5,6 @@ import requests
 from PIL import Image
 import io
 
-# OpenAI API Key
-api_key = OkayCool
-
 # Function to encode the image
 def encode_image(image):
     if image.mode == 'RGBA':
@@ -23,7 +20,7 @@ def get_meal_info(image):
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}"
+        "Authorization": f"Bearer {OkayCool}"
     }
 
     payload = {
