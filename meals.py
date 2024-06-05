@@ -1,9 +1,11 @@
-import os
 import streamlit as st
 import base64
 import requests
 from PIL import Image
 import io
+
+# Fetch the OpenAI API Key from Streamlit secrets
+api_key = st.secrets["openai"]["api_key"]
 
 # Function to encode the image
 def encode_image(image):
@@ -13,14 +15,13 @@ def encode_image(image):
     image.save(buffered, format="JPEG")
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
-
 # Function to get meal overview and calorie count using OpenAI API
 def get_meal_info(image):
     base64_image = encode_image(image)
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {st.write(st.secrets["OkayCool"])}"
+        "Authorization": f"Bearer {api_key}"
     }
 
     payload = {
@@ -48,7 +49,6 @@ def get_meal_info(image):
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
 
     return response.json()
-
 
 # Streamlit app
 def main():
@@ -82,7 +82,7 @@ def main():
 
     st.title("🍽️ Meal Analyzer")
     st.write("Upload an image of your meal to get an overview and estimate the calorie count.")
-
+    
     st.write("## Upload Your Meal Image")
     uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
 
@@ -101,7 +101,6 @@ def main():
                     st.write(meal_info)
                 except KeyError as e:
                     st.error("An error occurred while processing your image. Please try again.")
-
 
 if __name__ == "__main__":
     main()
