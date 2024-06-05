@@ -20,7 +20,7 @@ def get_meal_info(image):
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {OkayCool}"
+        "Authorization": f"Bearer {st.write(st.secrets["OkayCool"])}"
     }
 
     payload = {
